@@ -44,7 +44,7 @@ public class ApplicationContextConfiguration {
 	DriverManagerDataSource dataSource=new DriverManagerDataSource();	
 	dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 	dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
-	dataSource.setUsername("rohith");
+	dataSource.setUsername("ROHITH");
 	dataSource.setPassword("rohith");
 	return dataSource;
 	}
@@ -89,7 +89,7 @@ public BlogDAO getBlogDAO(SessionFactory sessionFactory){
 @Bean(name="usersDAO")
 public UsersDAO getUsersDAO(SessionFactory sessionFactory){
 	
-	return new UsersDAOImpl(sessionFactory);
+	return new UsersDAOImpl();
 }
 @Autowired
 @Bean(name="eventDAO")

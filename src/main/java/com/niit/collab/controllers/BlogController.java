@@ -9,23 +9,29 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.collab.dao.BlogDAO;
 import com.niit.collab.model.Blog;
+import com.niit.collab.model.Users;
 
 @RestController
 public class BlogController {
+	
 @Autowired
 private BlogDAO blogDAO;
 
+Users users;
+Blog blog;
 
 @PostMapping(value="/createblog")
 public ResponseEntity<Blog> addblog(@RequestBody Blog blog){
 	System.out.println("hello");
-	blogDAO.saveOrUpdate(blog);
+	/*blog.setId(users.getId());
+	blog.setDoc(new java.util.Date());
+	*/blogDAO.saveOrUpdate(blog);
 	return new ResponseEntity<Blog>(blog,HttpStatus.OK);
 	
 }

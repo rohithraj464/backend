@@ -23,6 +23,13 @@ public class Users {
 	private String password;
 	private int  mobile;
 	private String address;
+	private char status;
+	public char getStatus() {
+		return status;
+	}
+	public void setStatus(char status) {
+		this.status = status;
+	}
 	private Date dob;
 	private String gender;
 	public int getId() {

@@ -2,6 +2,8 @@ package com.niit.collab.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +22,18 @@ import com.niit.collab.model.Forum;
 
 @RestController
 public class ForumController {
+
 	@Autowired
-	private ForumDAO forumDAO;
-	@PostMapping(value="/createforum")
-	public ResponseEntity<Forum> addforum(@RequestBody Forum forum){
-		System.out.println("hello");
-		forumDAO.saveOrUpdate(forum);
-		return new ResponseEntity<Forum>(forum,HttpStatus.OK);
-		
+	ForumDAO forumDAO;
+	@PostMapping("/createforum")
+	public ResponseEntity<Forum> addforum(@RequestBody Forum forum,HttpSession session){
+	/*	int uid=(Integer)session.getAttribute("uid");
+		forum.setDoc(new Date());
+		forum.setUserid(uid);*/
+		forumDAO.saveOrUpdate(forum);	
+		return new ResponseEntity<Forum>(forum ,HttpStatus.OK);
 	}
-	@PutMapping(value="/updateforum")
-	public ResponseEntity<Forum> updateforum(@RequestBody Forum forum){
-		System.out.println("hello");
-		forumDAO.saveOrUpdate(forum);
-		return new ResponseEntity<Forum>(forum,HttpStatus.OK);
-		
-	}
+	
 	@GetMapping(value="/forum")
 	public ResponseEntity<List<Forum>> listforum(){
 		System.out.println("list of blog");
@@ -46,7 +44,6 @@ public class ForumController {
 	public ResponseEntity<Forum> deleteforum(Forum forum,@PathVariable("forumid") int forumid){
 		Forum forum1=forumDAO.getforum(forumid);
 		forumDAO.delete(forum1);
-		return new ResponseEntity<Forum>(forum,HttpStatus.OK);
+		return new ResponseEntity<Forum>(forum1,HttpStatus.OK);
 	}
-
 }
